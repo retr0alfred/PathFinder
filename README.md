@@ -17,8 +17,11 @@ difference.
 
 **Live:** frontend on Vercel, API on Render. Both free tiers.
 
-- Web — `https://<your-project>.vercel.app`
-- API — `https://lodestar-api.onrender.com` · docs at `/docs`
+- **Web — <https://path-finder-cyan.vercel.app>**
+- **API — <https://lodestar-api-qvzn.onrender.com>** · interactive docs at `/docs`
+
+The API sleeps after 15 idle minutes; the first request after that takes about a
+minute to wake it. Open it once before a demo.
 
 ---
 

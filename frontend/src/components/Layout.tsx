@@ -111,9 +111,15 @@ export default function Layout({ children }: { children: ReactNode }) {
 
       <footer className="mx-auto w-full max-w-[1400px] px-4 pb-7 sm:px-6">
         <div className="rule mb-3" />
+        {/*
+          This used to read "your plan is stored only on this machine", which was
+          true while Lodestar only ran locally and became false the moment it was
+          hosted: plans live in the API's database, not the visitor's browser. A
+          privacy claim that is no longer true is worse than none at all.
+        */}
         <p className="text-xs leading-relaxed text-ink-400">
           Every resource in Lodestar is a real, working link from a checked catalogue — nothing is
-          invented. Your plan is stored only on this machine.
+          invented. Your plan is kept on the server running this app and is not shared with anyone.
         </p>
         <p className="mt-1 text-[11px] text-ink-300">Designed and built by Alfred Mathew.</p>
       </footer>
