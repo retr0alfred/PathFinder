@@ -39,18 +39,58 @@ type RequestOptions = {
   signal?: AbortSignal
 }
 
+/** True when the API is hosted rather than running on this machine. */
+export const IS_HOSTED: boolean = !/^https?:\/\/(127\.0\.0\.1|localhost)\b/.test(API_BASE)
+
+/**
+ * How long a sleeping API is given to wake before we give up.
+ *
+ * A free hosted instance is shut down after fifteen idle minutes and takes
+ * about a minute to come back. While it is waking, the host answers with its
+ * own holding page, which carries no CORS headers — so `fetch` rejects with a
+ * network error that is indistinguishable from "there is no server". The
+ * result was a visitor being told the backend was down when it was merely
+ * asleep, and being advised to run a batch file that does not exist for them.
+ *
+ * So the first request retries, patiently, instead of failing on the first
+ * rejection. Locally there is nothing to wake and a refused connection means
+ * exactly what it says, so no retry happens at all.
+ */
+const WAKE_ATTEMPTS = IS_HOSTED ? 6 : 1
+const WAKE_DELAY_MS = 5000
+
+const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
+
 export async function request<T>(path: string, options: RequestOptions = {}): Promise<T> {
   const { method = 'GET', body, signal } = options
-  let response: Response
-  try {
-    response = await fetch(`${API_BASE}${path}`, {
-      method,
-      signal,
-      headers: body === undefined ? undefined : { 'Content-Type': 'application/json' },
-      body: body === undefined ? undefined : JSON.stringify(body),
-    })
-  } catch (cause) {
-    throw new ApiError('Cannot reach the Lodestar API. Is the backend running?', 0, cause)
+  let response: Response | undefined
+  let lastCause: unknown
+
+  for (let attempt = 0; attempt < WAKE_ATTEMPTS; attempt += 1) {
+    try {
+      response = await fetch(`${API_BASE}${path}`, {
+        method,
+        signal,
+        headers: body === undefined ? undefined : { 'Content-Type': 'application/json' },
+        body: body === undefined ? undefined : JSON.stringify(body),
+      })
+      break
+    } catch (cause) {
+      lastCause = cause
+      // A deliberate cancellation is not a sleeping server.
+      if (signal?.aborted) throw new ApiError('Request cancelled', 0, cause)
+      if (attempt < WAKE_ATTEMPTS - 1) await sleep(WAKE_DELAY_MS)
+    }
+  }
+
+  if (!response) {
+    throw new ApiError(
+      IS_HOSTED
+        ? 'The Lodestar API is not responding. It sleeps when idle and takes about a minute to wake — try again in a moment.'
+        : 'Cannot reach the Lodestar API. Is the backend running?',
+      0,
+      lastCause,
+    )
   }
 
   const text = await response.text()

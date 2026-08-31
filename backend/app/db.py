@@ -27,12 +27,38 @@ from app.config import get_settings
 logger = logging.getLogger(__name__)
 
 _settings = get_settings()
-_is_sqlite = _settings.database_url.startswith("sqlite")
+
+
+def _normalise(url: str) -> str:
+    """Accept the URL shape hosts actually hand out.
+
+    Render (and Heroku before it) publish ``postgres://``, which SQLAlchemy 2
+    no longer recognises, and they publish it without a driver. Rewriting it
+    here means the environment variable can be pasted in verbatim rather than
+    edited into a dialect string nobody enjoys remembering.
+    """
+    if url.startswith("postgres://"):
+        url = "postgresql://" + url[len("postgres://") :]
+    if url.startswith("postgresql://"):
+        url = "postgresql+psycopg://" + url[len("postgresql://") :]
+    return url
+
+
+DATABASE_URL = _normalise(_settings.database_url)
+_is_sqlite = DATABASE_URL.startswith("sqlite")
+
+# A free container sleeps and its database connections are severed with it, so
+# a pooled connection is frequently dead by the time the next request arrives.
+# pre_ping costs one round trip and turns "connection already closed" into a
+# transparent reconnect; recycle keeps a connection from ageing past the
+# provider's own idle timeout.
+_pool_args = {} if _is_sqlite else {"pool_pre_ping": True, "pool_recycle": 280}
 
 engine: Engine = create_engine(
-    _settings.database_url,
+    DATABASE_URL,
     echo=False,
     connect_args={"check_same_thread": False, "timeout": 30} if _is_sqlite else {},
+    **_pool_args,
 )
 
 

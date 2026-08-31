@@ -78,6 +78,14 @@ class Settings(BaseSettings):
     # Overridden by the test suite so a test run can never touch, or clear,
     # a real installation's discovered subjects -- which it once did.
     generated_dir: str = ""
+    # Where discovered subjects are *stored*, as opposed to which directory.
+    #   auto      files when the database is SQLite, the database otherwise
+    #   files     a directory. Inspectable; the right answer on a laptop
+    #   database  one row per overlay file. The only thing that survives on a
+    #             free container, whose disk is wiped on every spin-down
+    # "auto" is what makes a subject built in production outlive the container
+    # without changing anything about local development.
+    generated_store: str = "auto"
 
     # --- Latency budgets ----------------------------------------------------
     # How long the optional prose layer may add to generating a plan. The

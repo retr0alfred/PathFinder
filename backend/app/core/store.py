@@ -26,9 +26,9 @@ read-modify-write so two simultaneous expansions cannot lose each other's work.
 
 from __future__ import annotations
 
+import io
 import json
 import logging
-import os
 import threading
 from datetime import datetime, timezone
 from pathlib import Path
@@ -64,31 +64,37 @@ def generated_dir() -> Path:
     return target
 
 
-def _read_json(path: Path, default: Any) -> Any:
-    if not path.exists():
+def _read_json(name: str, default: Any) -> Any:
+    """One overlay file, parsed. Missing or corrupt reads as ``default``."""
+    from app.core import blobstore
+
+    raw = blobstore.get_store().read(name)
+    if raw is None:
         return default
     try:
-        return json.loads(path.read_text(encoding="utf-8"))
-    except (json.JSONDecodeError, OSError) as exc:
-        logger.error("generated file %s is unreadable (%s) -- ignoring it", path.name, exc)
+        return json.loads(raw.decode("utf-8"))
+    except (json.JSONDecodeError, UnicodeDecodeError) as exc:
+        logger.error("generated file %s is unreadable (%s) -- ignoring it", name, exc)
         return default
 
 
-def _write_json(path: Path, payload: Any) -> None:
-    """Write atomically, so a concurrent reader never sees a partial file."""
-    temporary = path.with_suffix(f".{os.getpid()}.tmp")
-    temporary.write_text(json.dumps(payload, indent=2, ensure_ascii=False), encoding="utf-8")
-    temporary.replace(path)
+def _write_json(name: str, payload: Any) -> None:
+    """Replace one overlay file. Atomic on disk; a single statement in a database."""
+    from app.core import blobstore
+
+    blobstore.get_store().write(
+        name, json.dumps(payload, indent=2, ensure_ascii=False).encode("utf-8")
+    )
 
 
 def load_skills() -> list[dict[str, Any]]:
     """Generated skill nodes, in the same shape as curated skills.json."""
-    return _read_json(generated_dir() / SKILLS_FILE, [])
+    return _read_json(SKILLS_FILE, [])
 
 
 def load_courses() -> list[dict[str, Any]]:
     """Generated catalogue entries, in the same shape as curated courses.json."""
-    return _read_json(generated_dir() / COURSES_FILE, [])
+    return _read_json(COURSES_FILE, [])
 
 
 def load_generated_questions() -> dict[str, dict[str, Any]]:
@@ -98,7 +104,7 @@ def load_generated_questions() -> dict[str, dict[str, Any]]:
     down the first time and never paid for again -- by anyone. This is the same
     bargain the topic cache makes.
     """
-    return _read_json(generated_dir() / QUESTIONS_FILE, {})
+    return _read_json(QUESTIONS_FILE, {})
 
 
 def append_questions(items: dict[str, dict[str, Any]]) -> int:
@@ -109,7 +115,7 @@ def append_questions(items: dict[str, dict[str, Any]]) -> int:
         bank = load_generated_questions()
         added = {k: v for k, v in items.items() if k not in bank}
         bank.update(added)
-        _write_json(generated_dir() / QUESTIONS_FILE, bank)
+        _write_json(QUESTIONS_FILE, bank)
     if added:
         logger.info("stored %d generated placement questions", len(added))
     return len(bank)
@@ -121,7 +127,7 @@ def load_topics() -> dict[str, dict[str, Any]]:
     This is the cache index. A hit here is why the second learner asking about
     quantum computing waits milliseconds instead of a minute.
     """
-    return _read_json(generated_dir() / TOPICS_FILE, {})
+    return _read_json(TOPICS_FILE, {})
 
 
 def topic_key(goal_text: str) -> str:
@@ -160,25 +166,27 @@ def find_topic(goal_text: str) -> dict[str, Any] | None:
     return None
 
 
-def vectors_path(kind: str, embedder: str) -> Path:
-    """Where the overlay's embedding matrix for one embedder lives."""
-    return generated_dir() / f"{kind}_embeddings.{embedder}.npy"
+def vectors_name(kind: str, embedder: str) -> str:
+    """The overlay's embedding matrix for one embedder."""
+    return f"{kind}_embeddings.{embedder}.npy"
 
 
-def ids_path(kind: str, embedder: str) -> Path:
+def ids_name(kind: str, embedder: str) -> str:
     """The id-per-row companion to a matrix. Order is meaningless without it."""
-    return generated_dir() / f"{kind}_embeddings.{embedder}.ids.json"
+    return f"{kind}_embeddings.{embedder}.ids.json"
 
 
 def load_vectors(kind: str, embedder: str) -> dict[str, np.ndarray]:
     """id -> vector for the overlay, or {} when nothing has been generated."""
-    matrix_file, id_file = vectors_path(kind, embedder), ids_path(kind, embedder)
-    if not matrix_file.exists() or not id_file.exists():
+    from app.core import blobstore
+
+    raw = blobstore.get_store().read(vectors_name(kind, embedder))
+    ids = _read_json(ids_name(kind, embedder), None)
+    if raw is None or ids is None:
         return {}
     try:
-        matrix = np.load(matrix_file)
-        ids = json.loads(id_file.read_text(encoding="utf-8"))
-    except (OSError, ValueError, json.JSONDecodeError) as exc:
+        matrix = np.load(io.BytesIO(raw))
+    except (OSError, ValueError) as exc:
         logger.error("generated %s vectors unreadable (%s) -- ignoring them", kind, exc)
         return {}
     if len(ids) != matrix.shape[0]:
@@ -199,10 +207,12 @@ def _merge_vectors(kind: str, embedder: str, new: dict[str, np.ndarray]) -> None
         return
     matrix = np.vstack([merged[identifier] for identifier in ids]).astype(np.float32)
 
-    temporary = vectors_path(kind, embedder).with_suffix(f".{os.getpid()}.tmp.npy")
-    np.save(temporary, matrix)
-    temporary.replace(vectors_path(kind, embedder))
-    _write_json(ids_path(kind, embedder), ids)
+    from app.core import blobstore
+
+    buffer = io.BytesIO()
+    np.save(buffer, matrix)
+    blobstore.get_store().write(vectors_name(kind, embedder), buffer.getvalue())
+    _write_json(ids_name(kind, embedder), ids)
 
 
 def append_topic(
@@ -244,9 +254,9 @@ def append_topic(
         topics = load_topics()
         topics[topic_key(goal_text)] = record
 
-        _write_json(generated_dir() / SKILLS_FILE, sorted(existing_skills.values(), key=lambda e: e["id"]))
-        _write_json(generated_dir() / COURSES_FILE, sorted(existing_courses.values(), key=lambda e: e["id"]))
-        _write_json(generated_dir() / TOPICS_FILE, topics)
+        _write_json(SKILLS_FILE, sorted(existing_skills.values(), key=lambda e: e["id"]))
+        _write_json(COURSES_FILE, sorted(existing_courses.values(), key=lambda e: e["id"]))
+        _write_json(TOPICS_FILE, topics)
         _merge_vectors("skill", embedder, skill_vectors)
         _merge_vectors("catalog", embedder, course_vectors)
 
@@ -265,7 +275,7 @@ def write_courses(courses: list[dict[str, Any]]) -> None:
     concurrent builds cannot lose each other's work.
     """
     with _write_lock:
-        _write_json(generated_dir() / COURSES_FILE, sorted(courses, key=lambda e: e["id"]))
+        _write_json(COURSES_FILE, sorted(courses, key=lambda e: e["id"]))
     logger.info("rewrote %d discovered resources", len(courses))
 
 
@@ -274,7 +284,7 @@ def alias_topic(goal_text: str, record: dict[str, Any]) -> None:
     with _write_lock:
         topics = load_topics()
         topics[topic_key(goal_text)] = {**record, "query": goal_text, "aliased": True}
-        _write_json(generated_dir() / TOPICS_FILE, topics)
+        _write_json(TOPICS_FILE, topics)
 
 
 def forget_topic(goal_text: str) -> bool:
@@ -297,19 +307,13 @@ def forget_topic(goal_text: str) -> bool:
         drop_skills = set(record.get("skill_ids", [])) - still_used_skills
         drop_courses = set(record.get("course_ids", [])) - still_used_courses
 
-        _write_json(generated_dir() / TOPICS_FILE, topics)
-        _write_json(
-            generated_dir() / SKILLS_FILE,
-            [e for e in load_skills() if e["id"] not in drop_skills],
-        )
-        _write_json(
-            generated_dir() / COURSES_FILE,
-            [e for e in load_courses() if e["id"] not in drop_courses],
-        )
+        _write_json(TOPICS_FILE, topics)
+        _write_json(SKILLS_FILE, [e for e in load_skills() if e["id"] not in drop_skills])
+        _write_json(COURSES_FILE, [e for e in load_courses() if e["id"] not in drop_courses])
         bank = load_generated_questions()
         for skill_id in drop_skills:
             bank.pop(skill_id, None)
-        _write_json(generated_dir() / QUESTIONS_FILE, bank)
+        _write_json(QUESTIONS_FILE, bank)
 
     logger.info(
         "forgot topic %r: %d skills, %d resources removed",
@@ -320,9 +324,8 @@ def forget_topic(goal_text: str) -> bool:
 
 def clear() -> None:
     """Delete the whole overlay. Used by tests and by ``--rebuild``."""
+    from app.core import blobstore
+
     with _write_lock:
-        target = generated_dir()
-        for path in target.iterdir():
-            if path.is_file():
-                path.unlink()
+        blobstore.get_store().clear()
     logger.info("generated overlay cleared")

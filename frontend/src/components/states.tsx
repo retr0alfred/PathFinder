@@ -11,7 +11,7 @@
  */
 
 import type { ReactNode } from 'react'
-import { ApiError } from '../lib/api'
+import { ApiError, IS_HOSTED } from '../lib/api'
 
 export function Skeleton({ className = '' }: { className?: string }) {
   return <div className={`animate-pulse rounded-lg bg-paper-300 ${className}`} />
@@ -46,11 +46,28 @@ export function ErrorPanel({
         {offline ? 'Cannot reach Lodestar' : title}
       </h2>
       <p className="mt-1.5 break-words text-sm text-ink-500">{message}</p>
+      {/*
+        The advice has to match where the app is actually running. Telling a
+        visitor on the hosted site to "start it with run.bat" is instructions
+        for a machine that is not theirs and a file they do not have; the real
+        cause there is a free instance that sleeps when idle.
+      */}
       {offline && (
         <p className="mt-2 text-sm text-ink-500">
-          The app server is not responding. Start it with{' '}
-          <code className="rounded bg-paper-200 px-1.5 py-0.5 font-mono text-[12px]">run.bat</code>{' '}
-          and try again — nothing you have done is lost.
+          {IS_HOSTED ? (
+            <>
+              The hosted API sleeps after a quiet spell and takes about a minute to wake. Give it a
+              moment and try again — nothing you have done is lost.
+            </>
+          ) : (
+            <>
+              The app server is not responding. Start it with{' '}
+              <code className="rounded bg-paper-200 px-1.5 py-0.5 font-mono text-[12px]">
+                run.bat
+              </code>{' '}
+              and try again — nothing you have done is lost.
+            </>
+          )}
         </p>
       )}
       {onRetry && (

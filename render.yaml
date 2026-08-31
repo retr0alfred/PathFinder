@@ -55,3 +55,26 @@ services:
 
       - key: LOG_LEVEL
         value: INFO
+
+      # Wired from the database below, so the password is never in this file
+      # and never in the repository. Without it the app falls back to SQLite on
+      # the container's disk, which is wiped every time the instance sleeps --
+      # learners would lose their progress and any subject built after deploy
+      # would vanish with it.
+      - key: DATABASE_URL
+        fromDatabase:
+          name: lodestar-db
+          property: connectionString
+
+      # "auto" resolves to the database whenever DATABASE_URL is not SQLite, so
+      # discovered subjects are stored as rows rather than as files on a disk
+      # that does not survive. Local development is untouched: SQLite there
+      # means the overlay stays a directory of inspectable JSON.
+      - key: GENERATED_STORE
+        value: auto
+
+databases:
+  - name: lodestar-db
+    plan: free
+    region: singapore
+    postgresMajorVersion: "16"

@@ -28,12 +28,11 @@ from app.core.websearch import verify
 
 def main(argv: list[str]) -> int:
     apply = "--write" in argv
-    path = store.generated_dir() / store.COURSES_FILE
-    if not path.exists():
+    courses = store.load_courses()
+    if not courses:
         print("no discovered resources yet")
         return 0
 
-    courses = json.loads(path.read_text(encoding="utf-8"))
     improved, unchanged, unreachable = 0, 0, []
 
     for entry in courses:
@@ -53,7 +52,7 @@ def main(argv: list[str]) -> int:
 
     if apply and improved:
         store.write_courses(courses)
-        print(f"written to {path}")
+        print(f"written to the generated overlay ({len(courses)} resources)")
     elif improved:
         print("re-run with --write to apply")
     return 0

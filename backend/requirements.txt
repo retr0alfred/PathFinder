@@ -1,6 +1,10 @@
 fastapi==0.115.6
 uvicorn[standard]==0.34.0
 sqlmodel==0.0.22
+# Postgres driver. Only imported when DATABASE_URL is a postgres URL, which is
+# how a deployed instance keeps learner data and discovered subjects across the
+# spin-downs a free container does every fifteen idle minutes.
+psycopg[binary]==3.2.3
 pydantic==2.10.4
 pydantic-settings==2.7.1
 python-dotenv==1.0.1

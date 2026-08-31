@@ -284,9 +284,19 @@ def intake_commit(
 
     goal_ids, candidates, degraded = resolve_goal(profile["goal_text"])
     if not goal_ids:
+        # Reaching here means the subject is genuinely outside the graph. The
+        # intake screen normally catches that first and offers to build it, so
+        # the only way to arrive at this point is with that check unanswered --
+        # most often because the API was asleep when it ran. Saying "describe
+        # it differently" then sends the learner to rephrase a goal that was
+        # perfectly clear, when the actual next step is to build the subject.
         raise HTTPException(
             status_code=422,
-            detail="that goal did not match anything in the skill graph -- try describing it differently",
+            detail=(
+                f"We don't teach {profile['goal_text']!r} yet. "
+                "Use 'Build this subject' on the previous step and we'll research it -- "
+                "about two minutes, once."
+            ),
         )
 
     graph = load_graph()
