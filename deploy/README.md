@@ -1,68 +1,95 @@
 # Deploying Lodestar for zero cost
 
-Frontend on Vercel, API on a Hugging Face Space. No card, no trial clock.
+Frontend on **Vercel**, API on **Render**. No card, no trial clock.
 
-The reason for this pairing rather than the obvious one: a free Render web
-service sleeps after **15 minutes** of inactivity and takes about a minute to
-wake, so a judge opening the link at 11pm gets a spinner as their first
-impression. A free HF Space (CPU basic, 2 vCPU / 16 GB) sleeps only after **48
-hours**, which in a judging window means never.
+> **Why not Hugging Face Spaces?** An earlier version of this file targeted a
+> Docker Space. Hugging Face now gates Docker and Gradio Spaces behind a paid
+> plan — *"Static Spaces are free for everyone. Gradio and Docker Spaces run on
+> compute and require a paid plan to create."* Only static HTML is free there,
+> which cannot host a Python API. Render's free web service does support Docker,
+> and with no payment method on file the failure mode is suspension, never a
+> bill.
 
 ---
 
-## 1. Backend -> Hugging Face Space
+## 1. API → Render
 
-Create the Space: **New Space -> SDK: Docker -> Hardware: CPU basic (free) ->
-Public**.
+[`render.yaml`](../render.yaml) at the repo root is a Blueprint, so Render
+configures the service itself.
 
-The Space expects its `Dockerfile` at the repository root, so copy this one up
-one level in the Space repo (or point the Space at a subdirectory build):
-
-```bash
-cp deploy/Dockerfile ./Dockerfile
-git add Dockerfile && git commit -m "chore: dockerfile for hugging face space"
-git remote add space https://huggingface.co/spaces/<user>/lodestar
-git push space main
-```
-
-**Secrets** (Space settings -> Variables and secrets). They arrive as
-environment variables; none of them belong in the repository:
+1. Sign up at [render.com](https://render.com) — GitHub login is fine.
+2. **New → Blueprint** → select this repository.
+3. Render reads the Blueprint and fills in: web service, Docker runtime, free
+   plan, Singapore region, `/health` health check, and every non-secret
+   environment variable.
+4. It prompts for the two values marked `sync: false`:
 
 | Key | Value |
 |---|---|
-| `GEMINI_API_KEY` | your key from https://aistudio.google.com/apikey |
-| `LLM_PROVIDER` | `gemini` (omit entirely to run in mock mode) |
-| `CORS_ORIGINS` | `https://<your-app>.vercel.app` |
+| `OPENROUTER_API_KEY` | your free key from <https://openrouter.ai/keys> |
+| `CORS_ORIGINS` | your Vercel URL — leave blank now, fill in after step 2 |
 
-Your API is then at `https://<user>-lodestar.hf.space`. Check
-`/health` — `catalog_size` should read 426 and `graph_nodes` 152.
+5. Deploy. The first build takes a few minutes, most of it baking the
+   sentence-embedding model into the image so that a cold start needs no
+   download.
 
-**The ephemeral-disk gotcha.** The Space's filesystem is wiped on every rebuild
-and on wake, so the SQLite file does not survive and learner profiles reset. The
-container re-seeds on start, so this is a clean reset rather than a failure, and
-it is stated in the README's known limitations. If you want persistence, point
-`DATABASE_URL` at a free hosted Postgres (Supabase or Neon) — SQLModel makes it
-a one-variable change.
+Verify at `https://<service>.onrender.com/health`:
 
-## 2. Frontend -> Vercel
+```json
+{"status":"ok","llm_provider":"openrouter","embedder":"bge-small",
+ "catalog_size":707,"graph_nodes":260,"graph_tracks":16,"question_bank":236}
+```
 
-1. Import the GitHub repo at vercel.com.
-2. **Root directory: `frontend`.** Framework preset: Vite. Build: `npm run build`.
-   Output: `dist`. (`deploy/vercel.json` documents the same settings; copy it to
-   `frontend/vercel.json` if you prefer it in the repo.)
-3. Environment variable: `VITE_API_BASE=https://<user>-lodestar.hf.space`
-4. Deploy. Every push to `main` redeploys.
+`GET /api/usage` should show `"chain":["openrouter"]` — one provider, no
+fallback — and a non-zero `free_models_available`.
 
-Then add the Vercel URL to the Space's `CORS_ORIGINS` and restart the Space.
-The API also allows any `*.vercel.app` origin by regex, so preview deployments
-work without reconfiguring anything.
+## 2. Frontend → Vercel
 
-## 3. Before judging
+1. Import the GitHub repo at [vercel.com](https://vercel.com).
+2. **Root directory: `frontend`.** This is the one setting that is not
+   inferred, and the build fails without it.
+3. Framework preset Vite; build `npm run build`; output `dist`. All
+   auto-detected. [`frontend/vercel.json`](../frontend/vercel.json) supplies the
+   SPA rewrite and asset cache headers.
+4. Environment variable: `VITE_API_BASE=https://<service>.onrender.com`
+5. Deploy. Every push to `main` redeploys.
 
-- [ ] Open the Vercel URL on a phone, on mobile data, in a private window. Time it.
-- [ ] Hit the Space once ~2 hours before judging so it is warm.
-- [ ] Confirm `/health` reports `llm_available: true` in production.
-- [ ] Run a full journey on the deployed build, not just locally.
-- [ ] Seed a demo learner in production (`python -m scripts.seed_demo`) so the
-      first screen a judge sees is populated rather than empty.
+Then set that Vercel URL as `CORS_ORIGINS` on the Render service and redeploy
+the API. Preview deployments need no extra configuration — `app/main.py` already
+allows any `*.vercel.app` origin by regex.
+
+`VITE_API_BASE` is inlined at build time, so changing it requires a redeploy,
+not just a restart.
+
+---
+
+## The free-tier bargain
+
+| | |
+|---|---|
+| Idle timeout | 15 minutes without traffic → spun down |
+| Wake | ~1 minute, with a loading page |
+| Disk | Ephemeral: reset on redeploy **and** on every spin-down |
+| Instance hours | 750/month — enough to run one service continuously |
+| Cost | ₹0. Without a payment method Render suspends rather than bills |
+
+**Two consequences worth designing around, both already handled:**
+
+*The discovered-subject corpus is committed to the repo* rather than built at
+runtime. A subject built live on the deployed instance works, and vanishes at
+the next spin-down. The 11 pre-built subjects live inside the image, so they
+open instantly and permanently.
+
+*Learner profiles reset* on every spin-down, since SQLite lives on that same
+ephemeral disk. This is a clean reset rather than a failure. For persistence,
+point `DATABASE_URL` at a free hosted Postgres (Supabase or Neon) — SQLModel
+makes it a one-variable change.
+
+## Before a demo or judging
+
+- [ ] Hit the API URL a few minutes beforehand so it is awake, not cold.
+- [ ] Confirm `/health` reports `llm_provider: openrouter`.
+- [ ] Confirm `/api/usage` shows free models available and no retired models.
+- [ ] Open the Vercel URL on a phone, on mobile data, in a private window.
+- [ ] Run one full journey on the deployed build, not just locally.
 - [ ] Put **both** URLs in the README and the submission form.

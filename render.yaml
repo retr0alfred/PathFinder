@@ -1,0 +1,57 @@
+# Render Blueprint — the API, on the free plan.
+#
+# Committing this is what turns deployment into "New > Blueprint > pick the
+# repo": the service type, runtime, plan, region, health check and every
+# environment variable are declared here rather than typed into a form.
+#
+# The two secrets are marked `sync: false`, which means Render prompts for
+# them once at deploy time and never stores them in this file. An API key in
+# a committed file is a leaked API key.
+#
+# Free-plan behaviour worth knowing, because it is a product decision and not
+# a surprise: the service spins down after 15 idle minutes and takes about a
+# minute to wake, and its filesystem resets each time. Nothing a learner needs
+# lives on that disk — the curated graph, the catalogue, the question bank and
+# the pre-built subjects all ship inside the image.
+services:
+  - type: web
+    name: lodestar-api
+    runtime: docker
+    plan: free
+    region: singapore
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      # The language layer is OpenRouter alone. No local model, no fallback
+      # provider. When OpenRouter is throttled the product still answers —
+      # every reason and question has a deterministic form already computed —
+      # it simply phrases them from templates rather than freshly.
+      - key: LLM_PROVIDER
+        value: openrouter
+
+      # Prompted at deploy time. Free-tier key from https://openrouter.ai/keys
+      # — only models priced at exactly zero are ever selected, and the code
+      # enforces that rather than trusting it.
+      - key: OPENROUTER_API_KEY
+        sync: false
+
+      # Your Vercel URL, e.g. https://path-finder.vercel.app
+      # Preview deployments are already allowed by a *.vercel.app regex in
+      # app/main.py, so this only needs the production origin.
+      - key: CORS_ORIGINS
+        sync: false
+
+      # Local ONNX embeddings, baked into the image at build time.
+      - key: EMBEDDER
+        value: auto
+
+      # Building a curriculum for an uncurated subject needs a model, and
+      # OpenRouter is one. Set to false to pin the product to its shipped
+      # graph and refuse to grow.
+      - key: EXPANSION_ENABLED
+        value: "true"
+
+      - key: LOG_LEVEL
+        value: INFO

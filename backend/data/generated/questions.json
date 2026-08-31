@@ -1,0 +1,1106 @@
+{
+  "quantum_computing.binary_numbers": {
+    "question": "What is the binary representation of the decimal number 13?",
+    "options": [
+      "1101",
+      "1110",
+      "1010",
+      "1001"
+    ],
+    "answer_index": 0,
+    "explanation": "1101",
+    "generated": true
+  },
+  "quantum_computing.boolean_algebra": {
+    "question": "What is the result of the Boolean operation A AND NOT B when A is 1 and B is 0?",
+    "options": [
+      "0",
+      "1",
+      "A",
+      "B"
+    ],
+    "answer_index": 1,
+    "explanation": "1",
+    "generated": true
+  },
+  "quantum_computing.complex_numbers": {
+    "question": "What is the complex number representation of the decimal 5?",
+    "options": [
+      "5+0i",
+      "0+5i",
+      "5-0i",
+      "0-5i"
+    ],
+    "answer_index": 0,
+    "explanation": "5+0i",
+    "generated": true
+  },
+  "quantum_computing.qubits": {
+    "question": "What is the state of a qubit in superposition if it is not measured?",
+    "options": [
+      "0",
+      "1",
+      "0+1i",
+      "0-1i"
+    ],
+    "answer_index": 2,
+    "explanation": "0+1i",
+    "generated": true
+  },
+  "quantum_computing.superposition": {
+    "question": "What is the result of applying a Hadamard gate to a qubit in state |0⟩?",
+    "options": [
+      "|0⟩",
+      "|1⟩",
+      "|+⟩",
+      "|-⟩"
+    ],
+    "answer_index": 2,
+    "explanation": "|+⟩",
+    "generated": true
+  },
+  "quantum_computing.quantum_entanglement": {
+    "question": "Which phenomenon in quantum computing is characterized by the behavior of particles that are entangled?",
+    "options": [
+      "Superposition",
+      "Quantum Tunneling",
+      "Quantum Interference",
+      "Quantum Entanglement"
+    ],
+    "answer_index": 3,
+    "explanation": "Quantum Entanglement is the phenomenon where particles become interconnected and the state of one (whether a particle is in this or that state) can instantly affect the state of another, regardless of the distance between them.",
+    "generated": true
+  },
+  "quantum_computing.quantum_interference": {
+    "question": "What phenomenon in quantum computing is responsible for the constructive and destructive interference of waves?",
+    "options": [
+      "Quantum Tunneling",
+      "Quantum Entanglement",
+      "Quantum Superposition",
+      "Quantum Interference"
+    ],
+    "answer_index": 3,
+    "explanation": "Quantum Interference is the phenomenon where the waves of particles interfere with each other, leading to constructive or destructive outcomes.",
+    "generated": true
+  },
+  "quantum_computing.quantum_algorithms": {
+    "question": "Which of the following algorithms is known for demonstrating the potential of quantum computing by solving problems faster than classical computers?",
+    "options": [
+      "Shor's Algorithm",
+      "Quantum Teleportation",
+      "Quantum Fourier Transform",
+      "Quantum Tunneling"
+    ],
+    "answer_index": 0,
+    "explanation": "Shor's Algorithm is a quantum algorithm that can factor large integers into their prime components exponentially faster than the best known classical algorithms.",
+    "generated": true
+  },
+  "quantum_physics.quantum_numbers": {
+    "question": "What are quantum numbers used for in quantum mechanics?",
+    "options": [
+      "Quantum numbers describe the energy levels of particles.",
+      "Quantum numbers are used to describe particle spin.",
+      "Quantum numbers represent the angular momentum of particles.",
+      "Quantum numbers indicate the charge of particles."
+    ],
+    "answer_index": 0,
+    "explanation": "Quantum numbers are used to describe the state of particles, including their energy levels and angular momentum.",
+    "generated": true
+  },
+  "quantum_physics.probability_math": {
+    "question": "What does quantum probability math primarily deal with in quantum mechanics?",
+    "options": [
+      "Quantum probability math calculates the mass of particles.",
+      "Quantum probability math deals with the statistical behavior of particles.",
+      "Quantum probability math describes the speed of particles.",
+      "Quantum probability math predicts the color of particles."
+    ],
+    "answer_index": 1,
+    "explanation": "Quantum probability math deals with the statistical behavior of particles, such as their probability amplitudes and probability density.",
+    "generated": true
+  },
+  "quantum_physics.vector_algebra": {
+    "question": "Vector algebra is used in quantum mechanics to describe what?",
+    "options": [
+      "Vector algebra helps in calculating the temperature of particles.",
+      "Vector algebra is used to describe particle trajectories.",
+      "Vector algebra is used to calculate the mass of particles.",
+      "Vector algebra is used to describe particle spin."
+    ],
+    "answer_index": 1,
+    "explanation": "Vector algebra is used to describe particle states and transformations in quantum mechanics.",
+    "generated": true
+  },
+  "quantum_physics.quantum_states": {
+    "question": "What does superposition in quantum mechanics mean?",
+    "options": [
+      "Superposition means particles can be in multiple states at once.",
+      "Superposition means particles are always in the ground state.",
+      "Superposition means particles cannot be observed.",
+      "Superposition means particles are always in the excited state."
+    ],
+    "answer_index": 0,
+    "explanation": "Superposition means particles can be in multiple states at once, until observed.",
+    "generated": true
+  },
+  "quantum_physics.quantum_mechanics_basics": {
+    "question": "What are quantum operators primarily used for in quantum mechanics?",
+    "options": [
+      "Quantum operators are used to calculate the speed of particles.",
+      "Quantum operators describe the evolution of quantum states.",
+      "Quantum operators are used to calculate the mass of particles.",
+      "Quantum operators describe the energy levels of particles."
+    ],
+    "answer_index": 1,
+    "explanation": "Quantum operators describe the evolution of quantum states and their corresponding observables.",
+    "generated": true
+  },
+  "quantum_physics.quantum_operators": {
+    "question": "What is the role of quantum operators in quantum mechanics?",
+    "options": [
+      "Quantum operators are used to calculate the temperature of particles.",
+      "Quantum operators describe the observable properties of particles.",
+      "Quantum operators are used to calculate the mass of particles.",
+      "Quantum operators describe the speed of particles."
+    ],
+    "answer_index": 1,
+    "explanation": "Quantum operators describe observable properties of particles and their evolution.",
+    "generated": true
+  },
+  "quantum_physics.quantum_information": {
+    "question": "What are qubits in quantum computing?",
+    "options": [
+      "Bits, as in classical computing",
+      "Photons, for quantum entanglement",
+      "Electrons, for quantum tunneling",
+      "Numbers, for quantum arithmetic"
+    ],
+    "answer_index": 0,
+    "explanation": "Qubits are the fundamental units of quantum information.",
+    "generated": true
+  },
+  "photosynthesis_and_cell_biology.carbon_dioxide_and_water": {
+    "question": "What are the main raw materials for photosynthesis?",
+    "options": [
+      "Water and oxygen",
+      "Water and carbon dioxide",
+      "Carbon dioxide and oxygen",
+      "Carbon dioxide and nitrogen"
+    ],
+    "answer_index": 1,
+    "explanation": "Photosynthesis requires carbon dioxide and water to produce glucose.",
+    "generated": true
+  },
+  "photosynthesis_and_cell_biology.light_absorption": {
+    "question": "Which pigment is crucial for light absorption in photosynthesis?",
+    "options": [
+      "Chlorophyll",
+      "Carotenoids",
+      "Phycoerythrin",
+      "Phycocyanin"
+    ],
+    "answer_index": 0,
+    "explanation": "Chlorophyll is the primary pigment that absorbs light for photosynthesis.",
+    "generated": true
+  },
+  "photosynthesis_and_cell_biology.chlorophyll_and_light_energy": {
+    "question": "Chlorophyll captures light energy, what does it convert to chemical energy?",
+    "options": [
+      "Heat energy",
+      "Sound energy",
+      "Chemical energy",
+      "Electrical energy"
+    ],
+    "answer_index": 2,
+    "explanation": "Chlorophyll captures light energy and converts it to chemical energy during photosynthesis.",
+    "generated": true
+  },
+  "photosynthesis_and_cell_biology.photosynthesis_process": {
+    "question": "What are the two main stages of photosynthesis?",
+    "options": [
+      "Light-dependent and light-independent",
+      "Photosynthesis and respiration",
+      "Absorption and release",
+      "Growth and reproduction"
+    ],
+    "answer_index": 0,
+    "explanation": "Photosynthesis is divided into light-dependent and light-independent stages.",
+    "generated": true
+  },
+  "photosynthesis_and_cell_biology.cell_membrane_function": {
+    "question": "What does the cell membrane transport to and from the cell?",
+    "options": [
+      "Water and oxygen",
+      "Carbon dioxide and water",
+      "Glucose and oxygen",
+      "Nutrients and waste products"
+    ],
+    "answer_index": 3,
+    "explanation": "The cell membrane transports nutrients and waste products in and out of the cell.",
+    "generated": true
+  },
+  "photosynthesis_and_cell_biology.cell_membrane_transport": {
+    "question": "What is the primary function of the cell membrane transport proteins?",
+    "options": [
+      "Storing genetic material",
+      "Facilitating the movement of substances across the membrane",
+      "Producing energy",
+      "Releasing energy"
+    ],
+    "answer_index": 1,
+    "explanation": "Transport proteins in the cell membrane help move substances across the membrane.",
+    "generated": true
+  },
+  "photosynthesis_and_cell_biology.photosynthesis_and_cell_biology_integration": {
+    "question": "In photosynthesis, where does the Calvin cycle take place?",
+    "options": [
+      "Nucleus",
+      "Mitochondria",
+      "Stroma",
+      "Cytoplasm"
+    ],
+    "answer_index": 2,
+    "explanation": "The stroma is where the Calvin cycle occurs in chloroplasts.",
+    "generated": true
+  },
+  "photosynthesis_and_cell_biology.cell_reproduction_and_growth": {
+    "question": "Which process is responsible for cell growth and division?",
+    "options": [
+      "Photosynthesis",
+      "Cell Reproduction",
+      "Growth",
+      "Respiration"
+    ],
+    "answer_index": 1,
+    "explanation": "Cell reproduction is the process of cell division and growth.",
+    "generated": true
+  },
+  "learn_to_read_sheet_music.recognize_note_names": {
+    "question": "What note is represented by the symbol ♭?",
+    "options": [
+      "C",
+      "D",
+      "G",
+      "A"
+    ],
+    "answer_index": 0,
+    "explanation": "Flats indicate a lower pitch.",
+    "generated": true
+  },
+  "learn_to_read_sheet_music.identify_note_positions_on_staff": {
+    "question": "Where is the note A on the staff?",
+    "options": [
+      "Bottom line",
+      "Middle",
+      "Top line",
+      "Second line up"
+    ],
+    "answer_index": 2,
+    "explanation": "A is typically on the top line of the staff.",
+    "generated": true
+  },
+  "learn_to_read_sheet_music.understand_note_values": {
+    "question": "How many beats does a quarter note get?",
+    "options": [
+      "1 beat",
+      "2 beats",
+      "4 beats",
+      "8 beats"
+    ],
+    "answer_index": 0,
+    "explanation": "A quarter note gets one beat.",
+    "generated": true
+  },
+  "learn_to_read_sheet_music.read_simple_time_signatures": {
+    "question": "What does a 4/4 time signature mean?",
+    "options": [
+      "4 beats per measure",
+      "4 quarter notes per measure",
+      "1 beat per measure",
+      "8 beats per measure"
+    ],
+    "answer_index": 1,
+    "explanation": "4/4 means four quarter notes per measure.",
+    "generated": true
+  },
+  "learn_to_read_sheet_music.identify_key_signatures": {
+    "question": "What key signature has two sharps?",
+    "options": [
+      "G major",
+      "C major",
+      "D major",
+      "F major"
+    ],
+    "answer_index": 0,
+    "explanation": "G major has two sharps in its key signature.",
+    "generated": true
+  },
+  "learn_to_read_sheet_music.read_simple_chord_progressions": {
+    "question": "What chord follows a C major chord in a simple progression?",
+    "options": [
+      "G major",
+      "D minor",
+      "A minor",
+      "F major"
+    ],
+    "answer_index": 1,
+    "explanation": "A common progression is C - G - Am - F.",
+    "generated": true
+  },
+  "learn_to_read_sheet_music.read_and_interpret_complex_chord_progressions": {
+    "question": "What are the chords in the progression Cmaj7 - G7 - Dm7 - Am7?",
+    "options": [
+      "C - G - Dm - A",
+      "Cmaj7 - G7 - D7 - Am7",
+      "C - G - Dm7 - A",
+      "Cmaj7 - G - Dm7 - A"
+    ],
+    "answer_index": 3,
+    "explanation": "The correct spelling of D7 is Dm7 in this context.",
+    "generated": true
+  },
+  "learn_to_read_sheet_music.read_and_interpret_simple_melodies": {
+    "question": "Which melody fits the key of G major?",
+    "options": [
+      "A minor scale",
+      "G major scale",
+      "F major scale",
+      "D minor scale"
+    ],
+    "answer_index": 1,
+    "explanation": "G major scale includes all the notes of the melody.",
+    "generated": true
+  },
+  "learn_to_read_sheet_music.understand_bar_lines_and_measures": {
+    "question": "What does a barline above a measure indicate?",
+    "options": [
+      "End of measure",
+      "Start of measure",
+      "Change in time signature",
+      "Continue measure"
+    ],
+    "answer_index": 0,
+    "explanation": "A barline above indicates the start of a new measure.",
+    "generated": true
+  },
+  "roman_republic_history.dates_and_generations": {
+    "question": "In which year did the Gracchi brothers propose reforms?",
+    "options": [
+      "133 BC",
+      "123 BC",
+      "133 AD",
+      "123 AD"
+    ],
+    "answer_index": 0,
+    "explanation": "Gracchi reforms were proposed in 133 BC.",
+    "generated": true
+  },
+  "roman_republic_history.basic_roman_geography": {
+    "question": "Which region of Italy was the most important for Roman trade?",
+    "options": [
+      "Apennines",
+      "Apulia",
+      "Tusculum",
+      "Magna Graecia"
+    ],
+    "answer_index": 1,
+    "explanation": "Apulia was the most important for Roman trade.",
+    "generated": true
+  },
+  "roman_republic_history.roman_civil_service": {
+    "question": "Who was primarily responsible for the administration of the Roman state?",
+    "options": [
+      "Censors",
+      "Praetors",
+      "Consuls",
+      "Aediles"
+    ],
+    "answer_index": 0,
+    "explanation": "Consuls were primarily responsible for the administration of the Roman state.",
+    "generated": true
+  },
+  "roman_republic_history.roman_civil_law": {
+    "question": "Which set of laws established the foundation of Roman civil law?",
+    "options": [
+      "Justinian Code",
+      "Twelve Tables",
+      "Code of Hammurabi",
+      "Corpus Juris Civilis"
+    ],
+    "answer_index": 1,
+    "explanation": "Twelve Tables established the foundation of Roman civil law.",
+    "generated": true
+  },
+  "roman_republic_history.roman_political_system": {
+    "question": "What role did the Tribunes of the Plebs play in the Roman Republic?",
+    "options": [
+      "Legislative",
+      "Judicial",
+      "Executive",
+      "Tribal"
+    ],
+    "answer_index": 0,
+    "explanation": "Tribunes of the Plebs played a role in the legislative process.",
+    "generated": true
+  },
+  "roman_republic_history.roman_military_system": {
+    "question": "Which type of legion was primarily used for defense and not offensive operations?",
+    "options": [
+      "Auxilia",
+      "Line Legions",
+      "Guarde Legions",
+      "Guard Legions"
+    ],
+    "answer_index": 2,
+    "explanation": "Auxilia were primarily used for defense and not offensive operations.",
+    "generated": true
+  },
+  "roman_republic_history.roman_economic_system": {
+    "question": "What was the main currency used in the Roman Republic?",
+    "options": [
+      "Gold",
+      "Silver",
+      "Bronze",
+      "Iron"
+    ],
+    "answer_index": 1,
+    "explanation": "Silver was the main currency used in the Roman Republic.",
+    "generated": true
+  },
+  "roman_republic_history.roman_literature_and_art": {
+    "question": "Which of these authors was NOT a Roman poet?",
+    "options": [
+      "Virgil",
+      "Ovid",
+      "Horace",
+      "Plato"
+    ],
+    "answer_index": 3,
+    "explanation": "Plato was not a Roman poet.",
+    "generated": true
+  },
+  "roman_republic_history.roman_religion": {
+    "question": "Which cult was considered the most important in the Roman Pantheon?",
+    "options": [
+      "Cult of Vesta",
+      "Cult of Apollo",
+      "Cult of Jupiter",
+      "Cult of Mars"
+    ],
+    "answer_index": 3,
+    "explanation": "The Cult of Jupiter was the most important in the Roman Pantheon.",
+    "generated": true
+  },
+  "astronomy.unit_conversions": {
+    "question": "Convert 120 kilometers to meters. Which is correct?",
+    "options": [
+      "12,000 meters",
+      "1,200 meters",
+      "120,000 meters",
+      "12 meters"
+    ],
+    "answer_index": 0,
+    "explanation": "1 kilometer = 1,000 meters",
+    "generated": true
+  },
+  "astronomy.basic_geometry": {
+    "question": "What is the angle of a full circle in degrees?",
+    "options": [
+      "180 degrees",
+      "90 degrees",
+      "360 degrees",
+      "100 degrees"
+    ],
+    "answer_index": 2,
+    "explanation": "A full circle is 360 degrees",
+    "generated": true
+  },
+  "astronomy.basic_physics": {
+    "question": "If a planet travels 200 km in 1 hour, what is its speed in meters per second?",
+    "options": [
+      "200 m/s",
+      "20,000 m/s",
+      "20 m/s",
+      "2,000 m/s"
+    ],
+    "answer_index": 3,
+    "explanation": "1 hour = 3600 seconds",
+    "generated": true
+  },
+  "astronomy.light_reflection_and_refraction": {
+    "question": "Which of these is not a type of light wave?",
+    "options": [
+      "Sound wave",
+      "Radio wave",
+      "X-ray",
+      "Infrared"
+    ],
+    "answer_index": 0,
+    "explanation": "Sound waves are mechanical waves, not light waves",
+    "generated": true
+  },
+  "astronomy.basic_trigonometry": {
+    "question": "What is the sine of a 45-degree angle?",
+    "options": [
+      "0.5",
+      "1",
+      "0.707",
+      "0.866"
+    ],
+    "answer_index": 2,
+    "explanation": "Sine of 45 degrees is √2/2 or approximately 0.707",
+    "generated": true
+  },
+  "astronomy.basic_statistics": {
+    "question": "If the mean of a set of numbers is 10 and the sum is 50, how many numbers are in the set?",
+    "options": [
+      "5",
+      "10",
+      "50",
+      "20"
+    ],
+    "answer_index": 0,
+    "explanation": "Mean is the sum divided by the number of items",
+    "generated": true
+  },
+  "astronomy.basic_astronomy_telescopes": {
+    "question": "What is the primary purpose of a telescope in astronomy?",
+    "options": [
+      "To measure the temperature of stars",
+      "To observe distant objects in space",
+      "To analyze the composition of planets",
+      "To detect gravitational waves"
+    ],
+    "answer_index": 1,
+    "explanation": "A telescope is used to observe distant objects in space, allowing astronomers to see objects that are too far away or too small to be seen with the naked eye.",
+    "generated": true
+  },
+  "astronomy.basic_chemistry": {
+    "question": "What is a key element in the composition of the sun?",
+    "options": [
+      "Hydrogen",
+      "Oxygen",
+      "Carbon",
+      "Nitrogen"
+    ],
+    "answer_index": 0,
+    "explanation": "Hydrogen is the primary element in the sun's composition.",
+    "generated": true
+  },
+  "astronomy.basic_photography": {
+    "question": "What setting should you adjust to increase exposure in photography?",
+    "options": [
+      "ISO",
+      "Aperture",
+      "Shutter Speed",
+      "Focus"
+    ],
+    "answer_index": 2,
+    "explanation": "To increase exposure, you should increase the Shutter Speed.",
+    "generated": true
+  },
+  "business_studies.apply_core_marketing_principles": {
+    "question": "Which of the following lists the four core elements of the marketing mix (4Ps)?",
+    "options": [
+      "Product, Price, Place, and People",
+      "Product, Price, Promotion, and Profit",
+      "Product, Price, Place, and Promotion",
+      "Price, Place, Promotion, and Profit"
+    ],
+    "answer_index": 2,
+    "explanation": "The 4Ps are Product, Price, Place, and Promotion; People is not one of the core elements.",
+    "generated": true
+  },
+  "business_studies.conduct_market_research_and_segmentation": {
+    "question": "Which of the following is an example of demographic segmentation?",
+    "options": [
+      "Segmenting consumers by age, income, and education",
+      "Segmenting consumers by brand loyalty levels",
+      "Segmenting consumers by usage frequency",
+      "Segmenting consumers by product preferences"
+    ],
+    "answer_index": 0,
+    "explanation": "Demographic segmentation divides the market based on variables like age, gender, income, and education.",
+    "generated": true
+  },
+  "business_studies.design_and_critique_a_complete_business_model": {
+    "question": "How many core building blocks make up the standard Business Model Canvas?",
+    "options": [
+      "Five key components: Product, Price, Place, Promotion, and People",
+      "Three pillars: Vision, Mission, and Values",
+      "Four quadrants: Market, Product, Finance, and Operations",
+      "Nine building blocks including Value Propositions and Revenue Streams"
+    ],
+    "answer_index": 3,
+    "explanation": "The Business Model Canvas includes nine specific blocks: Customer Segments, Value Propositions, Channels, Customer Relationships, Revenue Streams, Key Resources, Key Activities, Key Partners, and Cost Structure.",
+    "generated": true
+  },
+  "business_studies.develop_a_simple_business_strategy": {
+    "question": "Which of the following best describes a SWOT analysis?",
+    "options": [
+      "Analyzing past sales data to forecast future revenue",
+      "Evaluating internal strengths and weaknesses against external opportunities and threats",
+      "Calculating the break-even point for a new product",
+      "Mapping out the organizational hierarchy and reporting lines"
+    ],
+    "answer_index": 1,
+    "explanation": "SWOT analysis evaluates internal Strengths and Weaknesses alongside external Opportunities and Threats.",
+    "generated": true
+  },
+  "business_studies.evaluate_investment_decisions_and_financial_risk": {
+    "question": "What does NPV (Net Present Value) primarily measure?",
+    "options": [
+      "The total revenue generated by a project minus total costs",
+      "The initial cost required to start a project",
+      "The difference between the present value of cash inflows and outflows",
+      "The rate of return that equates the present value of inflows to the initial investment"
+    ],
+    "answer_index": 2,
+    "explanation": "NPV (Net Present Value) measures the difference between the present value of cash inflows and outflows over a project's life.",
+    "generated": true
+  },
+  "business_studies.grasp_fundamentals_of_operations_management": {
+    "question": "Which of the following best defines supply chain management?",
+    "options": [
+      "The flow of goods, services, and information from raw materials to the final consumer",
+      "The process of hiring and training employees",
+      "The strategy for setting prices on finished products",
+      "The design of a company's advertising campaigns"
+    ],
+    "answer_index": 0,
+    "explanation": "Supply chain management involves the coordination of materials, information, and finances as they move from supplier to manufacturer to consumer.",
+    "generated": true
+  },
+  "french_revolution.analyze_the_significance_of_the_storming_of_the_": {
+    "question": "What was the primary significance of the Storming of the Bastille on July 14, 1789?",
+    "options": [
+      "It was a minor prison incident with little historical impact.",
+      "It marked the beginning of the Reign of Terror.",
+      "It symbolized the collapse of royal authority and inspired nationwide uprisings.",
+      "It led directly to the execution of Louis XVI."
+    ],
+    "answer_index": 2,
+    "explanation": "The Bastille was a symbol of royal authority and tyranny; its fall marked the first major act of popular rebellion and galvanized the revolutionary movement across France.",
+    "generated": true
+  },
+  "french_revolution.describe_the_summoning_and_composition_of_the_es": {
+    "question": "How was the Estates General of 1789 summoned and composed?",
+    "options": [
+      "Only the nobility was invited to vote on new taxes.",
+      "The King excluded the clergy from the assembly.",
+      "The Third Estate was included but given equal voting weight per person.",
+      "All three estates were summoned, but voting was by estate, favoring the first two."
+    ],
+    "answer_index": 1,
+    "explanation": "The Third Estate, representing the vast majority of the population, was summoned alongside the clergy and nobility but faced unequal voting power, sparking demands for fair representation.",
+    "generated": true
+  },
+  "french_revolution.explain_the_financial_problems_of_the_french_mon": {
+    "question": "What were the main causes of the French monarchy’s financial crisis?",
+    "options": [
+      "The monarchy had no debt but spent excessively on palaces.",
+      "Taxation was evenly distributed across all social classes.",
+      "The financial crisis was caused by a sudden drop in agricultural yields.",
+      "Heavy war debt and unfair taxation overwhelmed the monarchy’s finances."
+    ],
+    "answer_index": 3,
+    "explanation": "France faced massive debt from wars (especially the American Revolution), costly court expenses, and a tax system that exempted the privileged classes, leaving the burden on the poor.",
+    "generated": true
+  },
+  "french_revolution.identify_key_enlightenment_ideas_influencing_rev": {
+    "question": "Which Enlightenment idea most directly challenged the authority of the French monarchy?",
+    "options": [
+      "The idea that monarchs rule by divine right was reinforced.",
+      "Rousseau’s concept of the general will challenged absolute monarchy.",
+      "Montesquieu advocated for a theocratic government.",
+      "Voltaire supported strict censorship to maintain order."
+    ],
+    "answer_index": 0,
+    "explanation": "Enlightenment thinkers like Rousseau emphasized popular sovereignty and the general will, challenging the divine right of kings and inspiring revolutionary ideals of democracy.",
+    "generated": true
+  },
+  "french_revolution.trace_the_formation_of_the_national_assembly": {
+    "question": "How did the National Assembly come into being in 1789?",
+    "options": [
+      "The National Assembly was formed by royal decree.",
+      "The King immediately accepted the Third Estate’s demands.",
+      "Deputies took the Tennis Court Oath after being locked out.",
+      "The Assembly dissolved after failing to gain support."
+    ],
+    "answer_index": 2,
+    "explanation": "After being locked out of the Estates General, the Third Estate deputies took the Tennis Court Oath, declaring they would not disband until a constitution was established, forming the National Assembly.",
+    "generated": true
+  },
+  "french_revolution.understand_pre_revolutionary_french_society_and_": {
+    "question": "Which statement best describes the structure of pre-revolutionary French society?",
+    "options": [
+      "All citizens were legally equal under the law.",
+      "The Third Estate paid no taxes and held no responsibilities.",
+      "Society was divided into three estates with unequal rights and burdens.",
+      "The monarchy abolished the estate system before 1789."
+    ],
+    "answer_index": 1,
+    "explanation": "The Ancien Régime divided French society into three estates—clergy, nobility, and commoners—with the first two enjoying privileges and exemption from most taxes.",
+    "generated": true
+  },
+  "french_revolution.analyze_the_rise_of_napoleon_and_the_end_of_the_": {
+    "question": "Which event most directly marked the end of the French Revolution?",
+    "options": [
+      "Louis XVI was restored to the throne in 1799.",
+      "The National Convention declared war on Prussia.",
+      "Napoleon seized power in a coup of 18 Brumaire.",
+      "The Jacobins regained control of the legislature."
+    ],
+    "answer_index": 2,
+    "explanation": "Napoleon's coup of 18 Brumaire in 1799 ended the Directory and established the Consulate, marking the effective end of the French Revolution.",
+    "generated": true
+  },
+  "french_revolution.assess_the_causes_and_consequences_of_the_reign_": {
+    "question": "What was the primary cause and mechanism of the Reign of Terror?",
+    "options": [
+      "It was initiated by King Louis XVI to suppress the nobility.",
+      "It was led by the Committee of Public Safety to eliminate enemies of the revolution.",
+      "It began as a peaceful negotiation between the monarchy and the assembly.",
+      "It was a cultural movement to promote Enlightenment ideals."
+    ],
+    "answer_index": 1,
+    "explanation": "The Reign of Terror was driven by the Committee of Public Safety under Robespierre to eliminate counter-revolutionary threats during a war and internal chaos.",
+    "generated": true
+  },
+  "french_revolution.describe_the_transition_from_terror_to_the_direc": {
+    "question": "How did the French Revolution transition from the Reign of Terror to the Directory?",
+    "options": [
+      "The Directory was established immediately after the storming of the Bastille.",
+      "Robespierre's execution initiated the Thermidorian Reaction, leading to the Directory.",
+      "The monarchy was restored to end the Terror.",
+      "The Directory was a radical Jacobin committee."
+    ],
+    "answer_index": 3,
+    "explanation": "The Thermidorian Reaction overthrew Robespierre, leading to the Directory, a moderate government that ended the extreme policies of the Terror.",
+    "generated": true
+  },
+  "french_revolution.evaluate_the_establishment_of_the_constitutional": {
+    "question": "What was the key political outcome of the Constitution of 1791?",
+    "options": [
+      "It created a constitutional monarchy with a Legislative Assembly.",
+      "It abolished the monarchy entirely and declared a republic.",
+      "It restored absolute power to the Catholic Church.",
+      "It established a military dictatorship under Napoleon."
+    ],
+    "answer_index": 0,
+    "explanation": "The Constitution of 1791 established a constitutional monarchy, limiting the king's power and creating a Legislative Assembly to govern France.",
+    "generated": true
+  },
+  "french_revolution.explain_the_role_of_popular_mobilization_in_earl": {
+    "question": "What was the significance of the Women's March in October 1789?",
+    "options": [
+      "It was a peaceful petition signed by women in Paris.",
+      "It was a riot led by foreign mercenaries.",
+      "The Women's March on Versailles forced the royal family to return to Paris.",
+      "It resulted in the immediate abolition of the monarchy."
+    ],
+    "answer_index": 2,
+    "explanation": "The Women's March on Versailles in October 1789 forced the royal family to return to Paris, demonstrating the power of popular mobilization in shaping revolutionary events.",
+    "generated": true
+  },
+  "french_revolution.interpret_the_declaration_of_the_rights_of_man_a": {
+    "question": "What core principles did the Declaration of the Rights of Man and of the Citizen promote?",
+    "options": [
+      "It was a decree abolishing the feudal system.",
+      "It proclaimed liberty, equality, and natural rights as principles of the revolution.",
+      "It established the Catholic Church as the state religion.",
+      "It was written by King Louis XVI to assert royal authority."
+    ],
+    "answer_index": 1,
+    "explanation": "The Declaration of the Rights of Man and of the Citizen articulated Enlightenment ideals of liberty, equality, and natural rights, serving as a foundational document of the revolution.",
+    "generated": true
+  },
+  "quantum_computing.complex_numbers_and_vector_spaces": {
+    "question": "Which condition must a quantum state vector satisfy?",
+    "options": [
+      "Any complex numbers are allowed.",
+      "The sum of the components must be 1.",
+      "The sum of squared magnitudes of components must be 1.",
+      "Components must be real numbers."
+    ],
+    "answer_index": 2,
+    "explanation": "The state vector must be normalized, so the sum of the squared magnitudes of its components must equal 1.",
+    "generated": true
+  },
+  "quantum_computing.dirac_notation_and_quantum_states": {
+    "question": "What is the normalization condition for a state |ψ⟩?",
+    "options": [
+      "⟨ψ|φ⟩ = 0 for all states.",
+      "⟨ψ|ψ⟩ = 1.",
+      "⟨ψ|ψ⟩ = 0.",
+      "⟨ψ|φ⟩ = 1 always."
+    ],
+    "answer_index": 1,
+    "explanation": "The inner product of a state with itself, ⟨ψ|ψ⟩, must equal 1 for a normalized quantum state.",
+    "generated": true
+  },
+  "quantum_computing.quantum_entanglement_and_nonlocality": {
+    "question": "Which of the following best describes a Bell state?",
+    "options": [
+      "A product state of two qubits.",
+      "A state where measurement outcomes are independent.",
+      "A state with only real amplitudes.",
+      "A maximally entangled state like (|00⟩+|11⟩)/√2."
+    ],
+    "answer_index": 3,
+    "explanation": "Bell states are maximally entangled states of two qubits, such as (|00⟩+|11⟩)/√2, which cannot be written as a product state.",
+    "generated": true
+  },
+  "quantum_computing.superposition_and_measurement": {
+    "question": "According to the Born rule, what is the probability of measuring |0⟩ in α|0⟩ + β|1⟩?",
+    "options": [
+      "The probability is |α|².",
+      "The probability is α.",
+      "The probability is |α|.",
+      "The probability is α²."
+    ],
+    "answer_index": 0,
+    "explanation": "The Born rule states that the probability of measuring outcome |0⟩ is the squared magnitude of its coefficient, |α|².",
+    "generated": true
+  },
+  "quantum_computing.tensor_products_and_entanglement": {
+    "question": "What does the tensor product of two state vectors represent?",
+    "options": [
+      "It adds the dimensions of the spaces.",
+      "It subtracts the components.",
+      "It creates a vector in a larger space with combined components.",
+      "It averages the amplitudes."
+    ],
+    "answer_index": 2,
+    "explanation": "The tensor product of two vectors combines their components multiplicatively, resulting in a larger vector space representing the composite system.",
+    "generated": true
+  },
+  "quantum_computing.unitary_operators_and_quantum_gates": {
+    "question": "What is a key property of unitary operators in quantum mechanics?",
+    "options": [
+      "They change the probability amplitudes unpredictably.",
+      "They preserve the inner product and norm of vectors.",
+      "They only apply to classical bits.",
+      "They always increase the dimension of the state space."
+    ],
+    "answer_index": 1,
+    "explanation": "Unitary operators preserve the inner product, ensuring that the norm of the state vector remains 1 after evolution.",
+    "generated": true
+  },
+  "quantum_computing.density_matrices_and_mixed_states": {
+    "question": "What is the physical meaning of taking the partial trace of a bipartite density matrix?",
+    "options": [
+      "It always returns a maximally mixed state.",
+      "Partial trace is only defined for entangled states.",
+      "It gives the reduced density matrix of the remaining subsystem.",
+      "The result is always a classical probability distribution."
+    ],
+    "answer_index": 2,
+    "explanation": "The partial trace over subsystem B of a product state yields the reduced density matrix of A, which is pure if the original state is separable.",
+    "generated": true
+  },
+  "quantum_computing.quantum_algorithms_factoring_and_period_finding": {
+    "question": "How does Shor's algorithm factor large integers efficiently?",
+    "options": [
+      "It directly computes the prime factorization classically.",
+      "It uses the quantum Fourier transform to find the period of a function.",
+      "It relies on Grover search to iterate through factors.",
+      "It solves discrete logarithms instead of factoring."
+    ],
+    "answer_index": 1,
+    "explanation": "Shor’s algorithm uses the quantum Fourier transform to find the period of a modular exponential function, which directly yields the factors of an integer.",
+    "generated": true
+  },
+  "quantum_computing.quantum_circuits_and_gate_sequences": {
+    "question": "What is the purpose of the gate sequence H-CNOT-H on two qubits?",
+    "options": [
+      "It prepares a Bell state without superposition.",
+      "It implements a classical XOR gate only.",
+      "It measures qubits before entanglement occurs.",
+      "It uses H, CNOT, and H to create quantum interference."
+    ],
+    "answer_index": 3,
+    "explanation": "The Hadamard gate creates superposition, the CNOT entangles qubits, and the second Hadamard performs basis change to enable interference.",
+    "generated": true
+  },
+  "quantum_computing.quantum_complexity_theory_and_advantage": {
+    "question": "What does the complexity class BQP represent?",
+    "options": [
+      "BQP is the class of problems efficiently solvable by a quantum computer.",
+      "BQP stands for 'Binary Quantum Processing' and is classical.",
+      "BQP is a subset of P and has no quantum advantage.",
+      "BQP only applies to algorithms using Grover search."
+    ],
+    "answer_index": 0,
+    "explanation": "BQP is the class of problems solvable by a quantum computer in polynomial time with bounded error, representing its theoretical limit.",
+    "generated": true
+  },
+  "quantum_computing.quantum_error_correction": {
+    "question": "How do stabilizer codes protect quantum information?",
+    "options": [
+      "Error correction is achieved by increasing clock speed.",
+      "Stabilizer codes use redundant physical qubits to protect logical information.",
+      "Quantum error correction is impossible due to no-cloning.",
+      "Surface codes are only used for classical data."
+    ],
+    "answer_index": 1,
+    "explanation": "Stabilizer codes protect logical qubits by encoding them across multiple physical qubits and using stabilizer measurements to detect errors without collapsing the state.",
+    "generated": true
+  },
+  "quantum_computing.quantum_search_and_amplitude_amplification": {
+    "question": "What is the core mechanism of Grover's search algorithm?",
+    "options": [
+      "It uses amplitude amplification to boost the target state's probability.",
+      "It searches by parallel classical trial and error.",
+      "It requires an exponential number of oracle queries.",
+      "It only works on unstructured databases with one item."
+    ],
+    "answer_index": 2,
+    "explanation": "Grover's algorithm uses amplitude amplification to increase the probability of measuring the correct state, achieving a quadratic speedup over classical search.",
+    "generated": true
+  },
+  "astrophysics.scale_of_the_universe_and_astronomical_measureme": {
+    "question": "A star shows a parallax of 0.1 arcseconds. What is its distance?",
+    "options": [
+      "1 parsec",
+      "10 parsecs",
+      "0.1 parsec",
+      "100 parsecs"
+    ],
+    "answer_index": 1,
+    "explanation": "Distance in parsecs equals 1 divided by the parallax in arcseconds, so 1/0.1 = 10 parsecs.",
+    "generated": true
+  },
+  "astrophysics.classical_mechanics_for_celestial_motion": {
+    "question": "A planet's orbital period doubles. By what factor does its semi-major axis change?",
+    "options": [
+      "2^(1/3)",
+      "2^(2/3)",
+      "4",
+      "Square root of 2"
+    ],
+    "answer_index": 1,
+    "explanation": "Kepler's third law gives T² ∝ a³, so a ∝ T^(2/3); doubling T multiplies a by 2^(2/3).",
+    "generated": true
+  },
+  "astrophysics.gravitation_and_tidal_forces": {
+    "question": "A planet's mass is tripled while its radius stays the same. How does escape velocity change?",
+    "options": [
+      "Increases by factor of 3",
+      "Increases by factor of √3",
+      "Decreases by factor of √3",
+      "Stays the same"
+    ],
+    "answer_index": 1,
+    "explanation": "Escape velocity v = √(2GM/R) scales with √M, so tripling M increases v by √3.",
+    "generated": true
+  },
+  "astrophysics.electromagnetic_radiation_and_spectra": {
+    "question": "A star's spectral line is observed at 600 nm but laboratory value is 500 nm. What is the radial velocity?",
+    "options": [
+      "Receding at 6×10⁷ m/s",
+      "Approaching at 6×10⁷ m/s",
+      "Receding at 6×10⁴ m/s",
+      "Receding at 6×10⁶ m/s"
+    ],
+    "answer_index": 3,
+    "explanation": "Doppler shift gives Δλ/λ = v/c; (100/500) × 3×10⁸ = 6×10⁷ m/s? No: v = 0.2c = 6×10⁷, but correct non-relativistic value for 20% shift is 6×10⁷ m/s receding.",
+    "generated": true
+  },
+  "astrophysics.telescopes_and_observational_techniques": {
+    "question": "A radio telescope's smallest resolvable angle depends mainly on which quantity?",
+    "options": [
+      "Mirror diameter only",
+      "Wavelength divided by diameter",
+      "Diameter divided by wavelength",
+      "Wavelength only"
+    ],
+    "answer_index": 1,
+    "explanation": "Diffraction-limited angular resolution is θ ≈ λ/D, so smaller angles require larger diameters or shorter wavelengths.",
+    "generated": true
+  },
+  "astrophysics.thermodynamics_and_statistical_mechanics_basics": {
+    "question": "A gas cloud doubles in volume at constant temperature. What happens to its internal pressure?",
+    "options": [
+      "Doubles",
+      "Halves",
+      "Quadruples",
+      "Stays the same"
+    ],
+    "answer_index": 1,
+    "explanation": "The ideal gas law gives P ∝ 1/V at constant T and n, so doubling V halves the pressure.",
+    "generated": true
+  },
+  "astrophysics.stellar_structure_and_evolution": {
+    "question": "A 20 solar-mass star ends its life. Which sequence correctly describes the remnant produced and the reason?",
+    "options": [
+      "Black hole, because the core exceeds the Tolman–Oppenheimer–Volkoff limit",
+      "Neutron star, because the core exceeds the Chandrasekhar limit but not the Tolman–Oppenheimer–Volkoff limit",
+      "White dwarf, because electron degeneracy pressure always supports the core",
+      "Neutron star, because the helium flash ejects the envelope before collapse"
+    ],
+    "answer_index": 0,
+    "explanation": "A 20 M☉ star's iron core exceeds the TOV limit (~2–3 M☉), so it collapses to a black hole rather than a stable neutron star.",
+    "generated": true
+  },
+  "astrophysics.interstellar_medium_and_star_formation": {
+    "question": "A molecular cloud fragment with insufficient mass begins to contract gravitationally. Which condition most directly halts the collapse and prevents a star from forming?",
+    "options": [
+      "Magnetic pressure support balances gravity before the fragment becomes opaque",
+      "Cosmic ray heating raises the Jeans mass above the fragment's mass",
+      "Turbulent fragmentation disperses the core before nuclear ignition",
+      "Radiation pressure from a forming protostar always halts infall"
+    ],
+    "answer_index": 0,
+    "explanation": "Magnetic support (and turbulent support) can prevent sub-Jeans-mass, non-self-gravitating fragments from collapsing; the other options either require already-formed stars or are not dominant halting mechanisms.",
+    "generated": true
+  },
+  "astrophysics.galaxies_and_the_milky_way": {
+    "question": "An astronomer measures a galaxy's rotation curve as flat out to large radii where little visible mass remains. What is the standard interpretation?",
+    "options": [
+      "A massive dark matter halo provides the additional gravitational pull",
+      "Modified Newtonian dynamics explains the rotation without unseen matter",
+      "The visible disk's mass was severely underestimated by a factor of 10",
+      "Tidal interactions with neighboring galaxies are accelerating the outer stars"
+    ],
+    "answer_index": 0,
+    "explanation": "Flat rotation curves beyond the visible disk are the classic evidence for an extended dark matter halo in spiral galaxies.",
+    "generated": true
+  },
+  "astrophysics.active_galactic_nuclei_and_quasars": {
+    "question": "An AGN's broad emission lines vary on timescales of days while the continuum varies on similar timescales. What does this most directly imply about the broad-line region?",
+    "options": [
+      "It lies within roughly light-days of the central continuum source",
+      "It is co-spatial with the galaxy's old stellar bulge",
+      "Its variability is driven by supernova rate fluctuations",
+      "It must be located outside the dusty torus by tens of parsecs"
+    ],
+    "answer_index": 0,
+    "explanation": "Fast variability sets an upper limit on the light-crossing size; broad-line reverberation places the BLR within light-days of the black hole.",
+    "generated": true
+  },
+  "astrophysics.large_scale_structure_and_cosmology": {
+    "question": "Observations of Type Ia supernovae at z ≈ 0.5 appear fainter than expected in a matter-only Einstein–de Sitter universe. What conclusion follows?",
+    "options": [
+      "The expansion rate was slower in the past, indicating a late-time accelerating universe",
+      "Supernovae at that redshift are intrinsically dimmer due to metallicity evolution",
+      "Intervening dust systematically dims distant supernovae by the observed amount",
+      "The supernovae are actually foreground objects in our own galaxy"
+    ],
+    "answer_index": 0,
+    "explanation": "Fainter-than-expected distant SNe Ia provided the first evidence for a presently accelerating expansion attributed to dark energy.",
+    "generated": true
+  },
+  "astrophysics.high_energy_astrophysics_and_gravitational_waves": {
+    "question": "LIGO detects a chirp signal lasting ~130 ms in the LIGO band. What compact-object merger is most consistent with this short, high-frequency inspiral?",
+    "options": [
+      "Binary neutron star merger",
+      "Binary black hole merger with low total mass",
+      "Neutron star–black hole merger at high redshift",
+      "Continuous signal from a nearby rotating neutron star"
+    ],
+    "answer_index": 0,
+    "explanation": "A short ~100 ms inspiral in band is characteristic of a BNS merger (e.g., GW170817); heavier BH mergers sweep more slowly across band.",
+    "generated": true
+  }
+}
