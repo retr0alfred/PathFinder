@@ -166,6 +166,40 @@ def get_store() -> BlobStore:
     return _store
 
 
+def bootstrap() -> int:
+    """Seed an empty database overlay from the corpus shipped in the image.
+
+    The committed subjects -- quantum computing, business studies, the French
+    Revolution and eight more -- travel as files inside the image, exactly as
+    ``skills.json`` does. When the overlay moved into the database those files
+    stopped being read, and a deployment that had shipped 260 skills came back
+    up serving 152: the database was empty and nothing had told it otherwise.
+
+    So the shipped files seed the database once, the same way the curated
+    graph seeds everything else. This runs at startup, does nothing when the
+    overlay already has content, and does nothing at all on the file backend,
+    where the files *are* the overlay.
+
+    Returns the number of blobs imported.
+    """
+    store = get_store()
+    if store.kind != "database" or store.names():
+        return 0
+
+    from app.core import store as store_module
+
+    shipped = store_module.generated_dir()
+    imported = 0
+    for path in sorted(shipped.iterdir()):
+        if not path.is_file() or path.name.endswith(".tmp"):
+            continue
+        store.write(path.name, path.read_bytes())
+        imported += 1
+    if imported:
+        logger.info("seeded the database overlay with %d shipped files", imported)
+    return imported
+
+
 def reset() -> None:
     """Drop the cached store. Used by tests that change configuration."""
     global _store

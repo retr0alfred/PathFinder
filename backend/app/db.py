@@ -44,6 +44,22 @@ def _normalise(url: str) -> str:
     return url
 
 
+def _safe_url(url: str) -> str:
+    """The URL with any password removed, for logging.
+
+    A hosted database URL carries its own credentials, and container logs are
+    not a private place -- they are visible to anyone with dashboard access and
+    are frequently pasted into issues. Printing the connection string verbatim
+    published the password on every boot.
+    """
+    if "@" not in url:
+        return url
+    prefix, _, host = url.rpartition("@")
+    scheme, sep, credentials = prefix.partition("://")
+    user = credentials.split(":")[0]
+    return f"{scheme}{sep}{user}:***@{host}"
+
+
 DATABASE_URL = _normalise(_settings.database_url)
 _is_sqlite = DATABASE_URL.startswith("sqlite")
 
@@ -79,7 +95,7 @@ def init_db() -> None:
     import app.models  # noqa: F401  -- registers the tables as a side effect
 
     SQLModel.metadata.create_all(engine)
-    logger.info("database ready at %s", _settings.database_url)
+    logger.info("database ready at %s", _safe_url(DATABASE_URL))
 
 
 def get_session() -> Iterator[Session]:

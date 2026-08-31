@@ -35,6 +35,14 @@ def main() -> int:
     configure_logging(settings.log_level)
     init_db()
 
+    # Move the subjects shipped in the image into the database the first time a
+    # deployment runs. Without this a hosted instance serves only the curated
+    # graph, because the overlay it reads from starts empty. No-op locally and
+    # on every run after the first.
+    from app.core import blobstore
+
+    blobstore.bootstrap()
+
     graph = skill_graph.load_graph()
     catalog = retrieval.load_catalog()
     bank = questions.load_questions()

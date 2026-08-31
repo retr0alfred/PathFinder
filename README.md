@@ -97,17 +97,31 @@ Preview deployments work without touching anything — the API already allows an
 | | |
 |---|---|
 | Idle timeout | Render spins the API down after **15 minutes** with no traffic |
-| Wake | About **one minute**, during which a visitor sees a loading page |
+| Wake | About **one minute**. The frontend retries rather than reporting a failure |
 | Disk | **Ephemeral** — reset on every redeploy *and* every spin-down |
+| Database | Free Postgres. This is what actually survives a spin-down |
 | Cost | ₹0. With no card on file Render suspends rather than bills |
 
 The ephemeral disk is why **the discovered-subject corpus is committed to the
-repo** rather than generated at runtime. A subject built live on the deployed
-instance is real and works — and disappears at the next quiet quarter-hour.
-Shipping 11 pre-built subjects inside the image means they open instantly and
-survive forever. Learner profiles and progress live in SQLite on that same disk,
-so they reset too: a clean reset, not a failure, and stated here rather than
-discovered.
+repo** rather than generated at runtime: the 11 pre-built subjects live inside
+the image, so they open instantly and cannot be lost.
+
+Everything written *after* deploy goes to Postgres instead of that disk —
+learner profiles, mastery, plan versions, and any subject a visitor builds.
+Before this, a learner who waited two minutes for a new subject lost it at the
+next quiet quarter-hour, and so did everyone after them.
+
+**Where discovered subjects are stored is decided by the database, not by a
+flag you have to remember.** `GENERATED_STORE=auto` resolves to the database
+whenever `DATABASE_URL` is not SQLite, and to a directory of inspectable JSON
+when it is. So local development is unchanged — `data/generated/`, greppable,
+deletable with `rm -r` — and a deployment persists without either behaviour
+being special-cased.
+
+Render's free Postgres **expires 30 days after creation**. For a longer-lived
+deployment, point `DATABASE_URL` at a free tier that does not expire —
+[Neon](https://neon.tech) or [Supabase](https://supabase.com) — which is a
+one-variable change and needs no code edit.
 
 ---
 
@@ -398,9 +412,12 @@ An honest account, because the boundaries are as informative as the features.
 - **The free API tier sleeps.** Fifteen idle minutes and the next visitor waits
   about a minute. Nothing fixes this on a free plan; hitting the URL a few
   minutes before a demo does.
-- **Learner progress resets** whenever the API redeploys or spins down, because
-  a free instance has no persistent disk. Pointing `DATABASE_URL` at a free
-  hosted Postgres is a one-variable change if that matters.
+- **The free database expires after 30 days.** Render's free Postgres is time-
+  limited, not size-limited. Moving to Neon or Supabase is a `DATABASE_URL`
+  change and nothing else.
+- **A cold wake can still outlast the retry window.** The frontend retries for
+  about thirty seconds before reporting a failure, which covers a normal wake
+  but not a slow one on top of a fresh build.
 - **A free hosted model is a courtesy, not a guarantee.** OpenRouter's free tier
   is throttled without warning and publishes no daily allowance, so the usage
   panel shows real counts and states that the cap is unpublished rather than
